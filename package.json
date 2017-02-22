@@ -1,0 +1,22 @@
+{
+  "name": "trampmush",
+  "version": "1.0.0",
+  "description": "RxJS Mashup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pappa/TrampMush.git"
+  },
+  "author": "Pappa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pappa/TrampMush/issues"
+  },
+  "homepage": "https://github.com/Pappa/TrampMush#readme",
+  "devDependencies": {
+    "typescript": "^2.2.1"
+  }
+}
