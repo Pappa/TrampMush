@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Pappa/TrampMush#readme",
   "devDependencies": {
+    "@reactivex/rxjs": "^5.2.0",
     "typescript": "^2.2.1"
   }
 }
