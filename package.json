@@ -25,6 +25,7 @@
     "typescript": "^2.2.1"
   },
   "dependencies": {
-    "@reactivex/rxjs": "^5.2.0"
+    "@reactivex/rxjs": "^5.2.0",
+    "angular": "^1.6.2"
   }
 }
