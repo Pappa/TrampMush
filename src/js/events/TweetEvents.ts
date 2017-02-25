@@ -54,5 +54,5 @@ export class TweetEvents {
     }
 }
 
-angular.module("tm.core.events")
+angular.module("events")
     .service("TweetEvents", TweetEvents);

@@ -23,5 +23,5 @@ export class TweetState {
 
 }
 
-angular.module("core.state")
+angular.module("state")
     .service("TweetState", TweetState);

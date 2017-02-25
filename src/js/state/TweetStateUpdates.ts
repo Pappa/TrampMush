@@ -1,7 +1,7 @@
 import * as Rx from "@reactivex/rxjs";
 import {angular} from "angular";
 
-angular.module("core.state").factory(
+angular.module("state").factory(
     "TweetStateUpdates", 
     (
         TweetState,
