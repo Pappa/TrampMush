@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/Pappa/TrampMush#readme",
   "devDependencies": {
+    "awesome-typescript-loader": "^3.0.7",
     "serve": "^3.4.1",
+    "source-map-loader": "^0.1.6",
     "typescript": "^2.2.1"
   },
   "dependencies": {
