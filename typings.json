@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "rx": "registry:dt/rx#4.1.0+20170103235349"
+  }
+}

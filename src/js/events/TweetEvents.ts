@@ -1,5 +1,5 @@
 import * as Rx from "@reactivex/rxjs";
-import {angular} from "angular";
+import {angular, ng} from "angular";
 
 export class TweetEvents {
 
@@ -41,7 +41,7 @@ export class TweetEvents {
                     }
                   })
             ).catch((response: Models.Response<Models.Error>): any => {
-                this.responses.getSentimentError.onNext(response.data);
+                this.responses.getSentimentError.next(response.data);
                 return Rx.Observable.empty();
             })
         })
@@ -49,11 +49,9 @@ export class TweetEvents {
             return response.data;
         })
         .subscribe((result) => {
-            this.responses.getSentimentSuccess.onNext(result);
+            this.responses.getSentimentSuccess.next(result);
         });
     }
-
-
 }
 
 angular.module("tm.core.events")

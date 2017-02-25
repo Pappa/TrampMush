@@ -18,14 +18,14 @@ angular.module("core.state").factory(
         TweetEvents.results.getSentimentSuccess
             .subscribe((sentiment: Models.Sentiment) => {
                 TweetState.setSentiment(sentiment);
-                subject.onNext(TweetState);
+                subject.next(TweetState);
             });
 
         TweetEvents.results.getSentimentError
             .subscribe((error: Models.Error) => {
                 TweetState.setSentiment({});
                 TweetState.setError(error);
-                subject.onNext(TweetState);
+                subject.next(TweetState);
             });
         
         return subject;
