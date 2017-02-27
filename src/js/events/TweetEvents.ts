@@ -1,4 +1,4 @@
-import * as Rx from "@reactivex/rxjs";
+import Rx from 'rxjs/Rx';
 import {angular, ng} from "angular";
 
 export class TweetEvents {

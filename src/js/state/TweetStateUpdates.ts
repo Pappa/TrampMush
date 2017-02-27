@@ -1,4 +1,4 @@
-import * as Rx from "@reactivex/rxjs";
+import Rx from 'rxjs/Rx';
 import {angular} from "angular";
 import {TweetState} from "./TweetState"
 import {TweetEvents} from "../events/TweetEvents"
@@ -10,8 +10,8 @@ export class TweetStateUpdates {
     TweetState: TweetState;
 
     constructor(
-        TweetState,
-        TweetEvents
+        TweetState: TweetState,
+        TweetEvents: TweetEvents
     ) {
 
         this.subject = new Rx.BehaviorSubject(TweetState);

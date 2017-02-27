@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160726072212",
     "rx": "registry:dt/rx#4.1.0+20170103235349"
   }
 }
