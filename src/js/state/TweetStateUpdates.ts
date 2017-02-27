@@ -1,33 +1,36 @@
 import * as Rx from "@reactivex/rxjs";
 import {angular} from "angular";
+import {TweetState} from "./TweetState"
+import {TweetEvents} from "../events/TweetEvents"
 
-angular.module("state").factory(
-    "TweetStateUpdates", 
-    (
+export class TweetStateUpdates {
+
+    subject: Rx.BehaviorSubject<TweetState>;
+    TweetEvents: TweetEvents;
+    TweetState: TweetState;
+
+    constructor(
         TweetState,
         TweetEvents
-    ) => {
+    ) {
 
-        var subject = new Rx.BehaviorSubject(TweetState);
+        this.subject = new Rx.BehaviorSubject(TweetState);
 
-        TweetEvents.actions.clickPicture
-            .subscribe(() => {
-                TweetState.doSomething();
-            });
-
-        TweetEvents.results.getSentimentSuccess
+        this.TweetEvents.responses.getSentimentSuccess
             .subscribe((sentiment: Models.Sentiment) => {
-                TweetState.setSentiment(sentiment);
-                subject.next(TweetState);
+                this.TweetState.setSentiment(sentiment);
+                this.subject.next(this.TweetState);
             });
 
-        TweetEvents.results.getSentimentError
+        this.TweetEvents.responses.getSentimentError
             .subscribe((error: Models.Error) => {
-                TweetState.setSentiment({});
-                TweetState.setError(error);
-                subject.next(TweetState);
+                this.TweetState.setSentiment(null);
+                this.TweetState.setError(error);
+                this.subject.next(this.TweetState);
             });
-        
-        return subject;
+
     }
-);
+}
+
+angular.module("state")
+    .service("TweetStateUpdates", TweetStateUpdates);
