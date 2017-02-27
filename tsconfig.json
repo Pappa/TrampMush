@@ -4,11 +4,11 @@
     "target": "es5",
     "noImplicitAny": false,
     "sourceMap": true,
-    "module": "commonjs",
+    "module": "es6",
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "./src/**/*",
+    "./src/js/App.ts",
     "./node_modules/typescript/lib/lib.es6.d.ts"
   ],
   "exclude": [
