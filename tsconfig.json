@@ -9,9 +9,6 @@
   },
   "include": [
     "./src/js/App.ts",
-    "./node_modules/typescript/lib/lib.es6.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
+    "./src/js/models/Models.d.ts"
   ]
 }
