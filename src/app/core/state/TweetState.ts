@@ -1,5 +1,7 @@
-import {angular} from "angular";
+import { Injectable } from '@angular/core';
+import * as Models from '../models/Models';
 
+@Injectable()
 export class TweetState {
 
     tweets: Models.Tweet[];
@@ -22,6 +24,3 @@ export class TweetState {
     }
 
 }
-
-angular.module("state")
-    .service("TweetState", TweetState);

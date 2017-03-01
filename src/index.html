@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
+  <head>
+  	<title>TrampMush</title>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
 
-<head>
-  <title>TrampMush</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
-  <script src="js/events/TweetEvents.js"></script>
-  <script src="js/state/TweetState.js"></script>
-  <script src="js/state/TweetStateUpdates.js"></script>
-</head>
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
 
-<body>
-  <ng-app>
-    loading...
-  </ng-app>
-</body>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
 
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('main.js').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+
+  <body>
+    <my-app>
+    	loading...
+    </my-app>
+  </body>
 </html>

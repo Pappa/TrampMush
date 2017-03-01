@@ -1,6 +1,9 @@
-import Rx from 'rxjs/Rx';
-import {angular, ng} from "angular";
+import { Injectable } from '@angular/core';
+import { Http, Response, RequestOptionsArgs, Headers } from '@angular/http';
+import * as Rx from 'rxjs/Rx';
+import * as Models from '../models/Models';
 
+@Injectable()
 export class TweetEvents {
 
     actions = {
@@ -16,12 +19,8 @@ export class TweetEvents {
         getSentimentError: new Rx.Subject<Models.Error>()
     }
 
-    static $inject = [
-        "$http"
-    ];
-
     constructor(
-        private $http: ng.IHttpService
+        private http: Http
     ) { 
         this.initGetSentiment();
     }
@@ -29,17 +28,14 @@ export class TweetEvents {
     private initGetSentiment(): void {
         this.requests.getSentiment
         .flatMap((search: string) => {
-            return Rx.Observable.fromPromise(
-                this.$http({
-                    url: 'https://community-sentiment.p.mashape.com/text/',
-                    data: `txt=${search}`,
-                    method: 'POST',
-                    headers: {
-                      "X-Mashape-Key": "v8g0kwCaRYmshfcFjZxZlsVFYmP2p1OcS7WjsntSZ9GWy7E4Pb",
-                      "Content-Type": "application/x-www-form-urlencoded",
-                      "Accept": "application/json"
-                    }
-                  })
+            let headers = new Headers();
+            headers.append("X-Mashape-Key", "v8g0kwCaRYmshfcFjZxZlsVFYmP2p1OcS7WjsntSZ9GWy7E4Pb");
+            headers.append("Content-Type", "application/x-www-form-urlencoded");
+            headers.append("Accept", "application/json");
+            return this.http.post(
+                'https://community-sentiment.p.mashape.com/text/',
+                `txt=${search}`,
+                { headers: headers }
             ).catch((response: Models.Response<Models.Error>): any => {
                 this.responses.getSentimentError.next(response.data);
                 return Rx.Observable.empty();
@@ -53,6 +49,3 @@ export class TweetEvents {
         });
     }
 }
-
-angular.module("events")
-    .service("TweetEvents", TweetEvents);
