@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as Rx from 'rxjs/Rx';
-import {TweetState} from "./TweetState"
-import {TweetEvents} from "../events/TweetEvents"
+import {TweetState} from "./TweetState";
+import {TweetEvents} from "../events/TweetEvents";
 import * as Models from "../models/Models";
 
 @Injectable()

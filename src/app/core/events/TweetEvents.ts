@@ -36,13 +36,13 @@ export class TweetEvents {
                 'https://community-sentiment.p.mashape.com/text/',
                 `txt=${search}`,
                 { headers: headers }
-            ).catch((response: Models.Response<Models.Error>): any => {
-                this.responses.getSentimentError.next(response.data);
+            ).catch((response: Response) => {
+                this.responses.getSentimentError.next(response.json());
                 return Rx.Observable.empty();
             })
         })
-        .map((response: Models.Response<Models.Sentiment>): Models.Sentiment => {
-            return response.data;
+        .map((response: Response): Models.Sentiment => {
+            return response.json().result;
         })
         .subscribe((result) => {
             this.responses.getSentimentSuccess.next(result);
