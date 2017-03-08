@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { TweetEvents } from "../../core/events/TweetEvents";
-import * as Models from '../../core/models/Models';
+import { TweetEvents } from "../../modules/core/events/TweetEvents";
+import * as Models from '../../modules/core/models/Models';
 
 @Component({
   moduleId: module.id,
