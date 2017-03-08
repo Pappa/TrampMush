@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptionsArgs, Headers } from '@angular/http';
-import * as Rx from 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/empty';
 import * as Models from '../models/Models';
 
 @Injectable()
 export class TweetEvents {
 
     actions = {
-        clickPicture: new Rx.Subject<void>()
+        clickPicture: new Subject<void>()
     }
 
     requests = {
-        getSentiment: new Rx.Subject<string>()
+        getSentiment: new Subject<string>()
     }
 
     responses = {
-        getSentimentSuccess: new Rx.Subject<Models.Sentiment>(),
-        getSentimentError: new Rx.Subject<Models.Error>()
+        getSentimentSuccess: new Subject<Models.Sentiment>(),
+        getSentimentError: new Subject<Models.Error>()
     }
 
     constructor(
@@ -27,7 +32,7 @@ export class TweetEvents {
 
     private initGetSentiment(): void {
         this.requests.getSentiment
-        .flatMap((search: string) => {
+        .concatMap((search: string) => {
             let headers = new Headers();
             headers.append("X-Mashape-Key", "v8g0kwCaRYmshfcFjZxZlsVFYmP2p1OcS7WjsntSZ9GWy7E4Pb");
             headers.append("Content-Type", "application/x-www-form-urlencoded");
@@ -38,7 +43,7 @@ export class TweetEvents {
                 { headers: headers }
             ).catch((response: Response) => {
                 this.responses.getSentimentError.next(response.json());
-                return Rx.Observable.empty();
+                return Observable.empty();
             })
         })
         .map((response: Response): Models.Sentiment => {

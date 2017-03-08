@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as Rx from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {TweetState} from "./TweetState";
 import {TweetEvents} from "../events/TweetEvents";
 import * as Models from "../models/Models";
@@ -7,7 +7,7 @@ import * as Models from "../models/Models";
 @Injectable()
 export class TweetStateUpdates {
 
-    subject: Rx.BehaviorSubject<TweetState>;
+    subject: BehaviorSubject<TweetState>;
     tweetEvents: TweetEvents;
     tweetState: TweetState;
 
@@ -16,7 +16,7 @@ export class TweetStateUpdates {
         tweetEvents: TweetEvents
     ) {
 
-        this.subject = new Rx.BehaviorSubject(tweetState);
+        this.subject = new BehaviorSubject(tweetState);
 
         this.tweetEvents.responses.getSentimentSuccess
             .subscribe((sentiment: Models.Sentiment) => {
