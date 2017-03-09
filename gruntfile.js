@@ -8,7 +8,11 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: "./src/client",
-            src: ["**.html", "**.css"],
+            src: [
+              "**.html",
+              "**.css",
+              "src/\*\*/\*.ts"
+            ],
             dest: "./dist/client"
           }
         ]
@@ -17,7 +21,10 @@ module.exports = function(grunt) {
     ts: {
       app: {
         files: [{
-          src: ["src/\*\*/\*.ts", "!src/.baseDir.ts"],
+          src: [
+            "src/\*\*/\*.ts",
+            "!src/.baseDir.ts"
+          ],
           dest: "./dist"
         }],
         options: {
@@ -35,8 +42,11 @@ module.exports = function(grunt) {
     },
     watch: {
       ts: {
-        files: ["src/\*\*/\*.ts"],
-        tasks: ["ts"]
+        files: [
+          "src/\*\*/\*.ts",
+          "!src/.baseDir.ts"
+        ],
+        tasks: ["copy", "ts"]
       }
     }
   });
@@ -45,9 +55,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-ts");
 
-  grunt.registerTask("default", [
-    "copy",
-    "ts"
-  ]);
+  grunt.registerTask("default", ["copy", "ts"]);
 
 };
