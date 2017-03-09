@@ -9,9 +9,9 @@ module.exports = function(grunt) {
             expand: true,
             cwd: "./src/client",
             src: [
-              "**.html",
-              "**.css",
-              "src/\*\*/\*.ts"
+              "\*\*/\*.html",
+              "\*\*/\*.css",
+              "\*\*/\*.js"
             ],
             dest: "./dist/client"
           }

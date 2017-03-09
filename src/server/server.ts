@@ -62,6 +62,7 @@ export class Server {
   public config() {
     //add static paths
     this.app.use(express.static(path.join(__dirname, "../client")));
+    this.app.use("/node_modules", express.static(path.join(__dirname, "../../node_modules")));
 
     //mount json form parser
     this.app.use(bodyParser.json());
