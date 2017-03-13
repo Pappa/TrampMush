@@ -28,6 +28,7 @@ export class TweetEvents {
         private http: Http
     ) { 
         this.initGetSentiment();
+        this.initGetTweetStream();
     }
 
     private initGetSentiment(): void {
@@ -52,5 +53,9 @@ export class TweetEvents {
         .subscribe((result) => {
             this.responses.getSentimentSuccess.next(result);
         });
+    }
+
+    private initGetTweetStream(): void {
+        //var evtSource = new EventSource("ssedemo.php");
     }
 }
