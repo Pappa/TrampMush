@@ -36,7 +36,22 @@ module.exports = function(grunt) {
           experimentalDecorators: true,
           lib: [ "es2015", "dom" ],
           noImplicitAny: true,
-          suppressImplicitAnyIndexErrors: true
+          suppressImplicitAnyIndexErrors: true,
+          "typeRoots": [
+              "./custom_definitions",
+              "./node_modules/@types"
+          ],
+          "types": [
+              "eventsource",
+              "body-parser",
+              "express",
+              "express-serve-static-core",
+              "jasmine",
+              "mime",
+              "node",
+              "serve-static"
+          ],
+          "listFiles": true
         }
       }
     },

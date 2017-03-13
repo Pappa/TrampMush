@@ -56,6 +56,9 @@ export class TweetEvents {
     }
 
     private initGetTweetStream(): void {
-        //var evtSource = new EventSource("ssedemo.php");
+        var evtSource = new EventSource("/tweets");
+        evtSource.onmessage = (e: MessageEvent) => {
+            console.log(e);
+        }
     }
 }
