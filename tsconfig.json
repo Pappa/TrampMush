@@ -13,6 +13,9 @@
             "./custom_definitions",
             "./node_modules/@types"
         ],
+        "types": [
+            "eventsource"
+        ],
         "listFiles": true
     }
 }
