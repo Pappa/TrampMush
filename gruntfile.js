@@ -27,8 +27,9 @@ module.exports = function(grunt) {
           ],
           dest: "./dist"
         }],
-        options: {
-          target: "es5",
+        tsconfig: true
+        //options: {
+          /*target: "es5",
           module: "commonjs",
           moduleResolution: "node",
           sourceMap: true,
@@ -40,7 +41,7 @@ module.exports = function(grunt) {
           typeRoots: [
               "./custom_definitions",
               "./node_modules/@types"
-          ],
+          ],*/
           /*types: [
               "eventsource",
               "body-parser",
@@ -51,8 +52,8 @@ module.exports = function(grunt) {
               "node",
               "serve-static"
           ],*/
-          listFiles: true
-        }
+          /*listFiles: true*/
+        //}
       }
     },
     watch: {
