@@ -14,10 +14,10 @@ interface EventSourceInstance extends EventTarget {
     close: () => void;
 }
 
-interface EventSource {
+export interface EventSource {
     new (url: string, configuration?: EventSourceConfig): EventSourceInstance;
 }
 
-declare var eventSource: EventSource;
+/*declare var eventSource: EventSource;
 
-export default eventSource;
+export default eventSource;*/

@@ -37,11 +37,11 @@ module.exports = function(grunt) {
           lib: [ "es2015", "dom" ],
           noImplicitAny: true,
           suppressImplicitAnyIndexErrors: true,
-          "typeRoots": [
+          typeRoots: [
               "./custom_definitions",
               "./node_modules/@types"
           ],
-          "types": [
+          /*types: [
               "eventsource",
               "body-parser",
               "express",
@@ -50,8 +50,8 @@ module.exports = function(grunt) {
               "mime",
               "node",
               "serve-static"
-          ],
-          "listFiles": true
+          ],*/
+          listFiles: true
         }
       }
     },
