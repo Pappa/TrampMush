@@ -59,14 +59,16 @@ export class Server {
       res.writeHead(200, {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive'
+        'Connection': 'keep-alive',
+        'transfer-encoding': ''
       });
       res.write('\n');
 
       setInterval(() => {
         var s = Math.random().toString();
         console.log(s);
-        res.write(s + '\r\n');
+        res.write('event: message\n');
+        res.write('data: ' + s + '\n\n');
       }, 5000);
 
     });
