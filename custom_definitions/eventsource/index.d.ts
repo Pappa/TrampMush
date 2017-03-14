@@ -12,9 +12,9 @@ interface EventSource extends EventTarget {
     readonly readyState: number;
     readonly url: string;
     readonly withCredentials: boolean;
-	readonly CONNECTING: number;
-	readonly OPEN: number;
-	readonly CLOSED: number;
+    readonly CONNECTING: number;
+    readonly OPEN: number;
+    readonly CLOSED: number;
     onopen: (this: EventSource, ev: Event) => any;
     onmessage: (this: EventSource, ev: MessageEvent) => any;
     onerror: (this: EventSource, ev: Event) => any;
@@ -26,7 +26,7 @@ interface EventSource extends EventTarget {
 declare var EventSource: {
     prototype: EventSource;
     new (url: string, configuration?: EventSourceConfig): EventSource;
-	readonly CONNECTING: number;
-	readonly OPEN: number;
-	readonly CLOSED: number;
+    readonly CONNECTING: number;
+    readonly OPEN: number;
+    readonly CLOSED: number;
 }
