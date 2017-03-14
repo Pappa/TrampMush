@@ -1,10 +1,14 @@
-declare enum ReadyState { CONNECTING = 0, OPEN = 1, CLOSED = 2 }
+declare enum ReadyState {
+	CONNECTING = 0,
+	OPEN,
+	CLOSED
+}
 
 interface EventSourceConfig {
     withCredentials?: boolean;
 }
 
-interface EventSourceInstance extends EventTarget {
+interface EventSource extends EventTarget {
     readonly readyState: ReadyState;
     readonly url: string;
     readonly withCredentials: boolean;
@@ -14,10 +18,7 @@ interface EventSourceInstance extends EventTarget {
     close: () => void;
 }
 
-export interface EventSource {
-    new (url: string, configuration?: EventSourceConfig): EventSourceInstance;
+declare var EventSource: {
+    prototype: EventSource;
+    new (url: string, configuration?: EventSourceConfig): EventSource;
 }
-
-/*declare var eventSource: EventSource;
-
-export default eventSource;*/
