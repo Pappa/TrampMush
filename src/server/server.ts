@@ -1,4 +1,5 @@
 import * as bodyParser from "body-parser";
+import * as methodOverride from "method-override";
 import * as express from "express";
 import * as path from "path";
 
@@ -53,19 +54,20 @@ export class Server {
     //empty for now
     this.app.get('/tweets', function(req, res) {
 
-      req.socket.setTimeout(Infinity);
+      req.socket.setTimeout(1000 * 60 * 60);
 
       res.writeHead(200, {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive'
       });
+      res.write('\n');
 
       setInterval(() => {
         var s = Math.random().toString();
-        res.write(s);
-        res.write('\n');
-      }, 1000);
+        console.log(s);
+        res.write(s + '\r\n');
+      }, 5000);
 
     });
   }
@@ -83,6 +85,9 @@ export class Server {
 
     //mount json form parser
     this.app.use(bodyParser.json());
+
+    //mount method override
+    this.app.use(methodOverride());
 
     //mount query string parser
     this.app.use(bodyParser.urlencoded({

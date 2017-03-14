@@ -57,8 +57,14 @@ export class TweetEvents {
 
     private initGetTweetStream(): void {
         var evtSource = new EventSource("/tweets");
+        evtSource.onopen = (e: Event) => {
+            console.log("open", e.type);
+        }
         evtSource.onmessage = (e: MessageEvent) => {
-            console.log(e);
+            console.log("message", e.type);
+        }
+        evtSource.onerror = (e: Event) => {
+            console.log("error", e.type);
         }
     }
 }
