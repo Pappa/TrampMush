@@ -51,6 +51,23 @@ export class Server {
    */
   public api() {
     //empty for now
+    this.app.get('/tweets', function(req, res) {
+
+      req.socket.setTimeout(Infinity);
+
+      res.writeHead(200, {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive'
+      });
+
+      setInterval(() => {
+        var s = Math.random().toString();
+        res.write(s);
+        res.write('\n');
+      }, 1000);
+
+    });
   }
 
   /**
