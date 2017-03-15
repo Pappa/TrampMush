@@ -38,12 +38,24 @@ module.exports = function(grunt) {
         ],
         tasks: ["copy", "ts"]
       }
+    },
+    browserSync: {
+      bsFiles: {
+          src : [
+              "dist/**/*"
+          ]
+      },
+      options: {
+          watchTask: true,
+          proxy: "localhost:8080"
+      }
     }
   });
 
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-ts");
+  grunt.loadNpmTasks('grunt-browser-sync');
 
   grunt.registerTask("default", ["copy", "ts"]);
 

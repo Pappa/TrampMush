@@ -6,7 +6,7 @@
   "scripts": {
     "build": "grunt",
     "watch": "grunt watch",
-    "start": "grunt && concurrently \"npm run watch\" \"node ./bin/start\"",
+    "start": "grunt && concurrently \"npm run watch\" \"node ./bin/start\" \"grunt browserSync\"",
     "lint": "tslint ./src/**/*.ts -t verbose"
   },
   "repository": {
