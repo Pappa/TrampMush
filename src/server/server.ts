@@ -2,7 +2,7 @@ import * as bodyParser from "body-parser";
 import * as methodOverride from "method-override";
 import * as express from "express";
 import * as path from "path";
-import { SSE } from "./middleware/sse.middleware"
+import { SSE } from "./middleware/sse.middleware";
 
 export class Server {
 

@@ -1,5 +1,6 @@
 import * as express from "express";
-import { Config } from "../config/server.config";
+import { ServerConfig } from "../config/server.config";
+import { ApiConfig } from "../config/api.config";
 
 export class SSE {
 
@@ -7,7 +8,7 @@ export class SSE {
 
       req.socket.setTimeout(1000 * 60 * 60);
 
-      res.writeHead(200, Config.server.SSE_HEADERS);
+      res.writeHead(200, ServerConfig.SSE_HEADERS);
       res.write('\n');
 
       setInterval(() => {
