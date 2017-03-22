@@ -7,10 +7,10 @@ import { EventSourceUtil } from "./util/EventSourceUtil";
 
 @NgModule({
   providers: [
-  	TweetState,
-  	TweetStateUpdates, 
-  	TweetEvents,
-  	EventSourceUtil
+	TweetState,
+	TweetStateUpdates,
+	TweetEvents,
+	EventSourceUtil
   ]
 })
 export class CoreModule { }

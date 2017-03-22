@@ -18,7 +18,7 @@ export class SentimentComponent implements OnInit, OnDestroy {
 	constructor(
 		private tweetEvents: TweetEvents,
 		private tweetStateUpdates: TweetStateUpdates
-    ) {}
+	) {}
 
 	ngOnInit() {
 		this.tweetStateUpdates.subject.subscribe(this.onTweetStateUpdate.bind(this));
