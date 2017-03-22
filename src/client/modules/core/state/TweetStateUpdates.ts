@@ -7,13 +7,11 @@ import * as Models from "../models/Models";
 @Injectable()
 export class TweetStateUpdates {
 
-    subject: BehaviorSubject<TweetState>;
-    tweetEvents: TweetEvents;
-    tweetState: TweetState;
+    public subject: BehaviorSubject<TweetState>;
 
     constructor(
-        tweetState: TweetState,
-        tweetEvents: TweetEvents
+        private tweetState: TweetState,
+        private tweetEvents: TweetEvents
     ) {
 
         this.subject = new BehaviorSubject(tweetState);
@@ -28,6 +26,12 @@ export class TweetStateUpdates {
             .subscribe((error: Models.Error) => {
                 this.tweetState.setSentiment(null);
                 this.tweetState.setError(error);
+                this.subject.next(this.tweetState);
+            });
+
+        this.tweetEvents.responses.getTweetStreamSuccess
+            .subscribe((e) => {
+                this.tweetState.setTweet(e);
                 this.subject.next(this.tweetState);
             });
 

@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { TweetEvents } from "../../modules/core/events/TweetEvents";
+import { TweetState } from "../../modules/core/state/TweetState";
+import { TweetStateUpdates } from "../../modules/core/state/TweetStateUpdates";
 import * as Models from '../../modules/core/models/Models';
 
 @Component({
@@ -13,25 +15,23 @@ export class SentimentComponent implements OnInit, OnDestroy {
 	text: string;
 	sentiment: Models.Sentiment;
 	
-	constructor(private tweetEvents: TweetEvents) {}
+	constructor(
+		private tweetEvents: TweetEvents,
+		private tweetStateUpdates: TweetStateUpdates
+    ) {}
 
 	ngOnInit() {
-		this.tweetEvents.responses.getSentimentSuccess.subscribe(this.onSentiment.bind(this));
-		this.tweetEvents.responses.getSentimentError.subscribe(this.onSentimentError.bind(this));
+		this.tweetStateUpdates.subject.subscribe(this.onTweetStateUpdate.bind(this));
 		this.text = "my monkey is nice";
 		this.tweetEvents.requests.getSentiment.next(this.text);
 	}
 
 	ngOnDestroy() {
-		this.tweetEvents.responses.getSentimentSuccess.unsubscribe();
-		this.tweetEvents.responses.getSentimentSuccess.subscribe();
+		this.tweetStateUpdates.subject.unsubscribe();
 	}
 
-	onSentiment(sentiment: Models.Sentiment) {
-		this.sentiment = sentiment;
-	}
-
-	onSentimentError(error: Models.Error) {
-		console.log("onSentimentError", error);
+	onTweetStateUpdate(state: TweetState) {
+		this.sentiment = state.sentiment;
+		console.log(state);
 	}
 }

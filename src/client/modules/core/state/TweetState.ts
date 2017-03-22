@@ -4,15 +4,17 @@ import * as Models from '../models/Models';
 @Injectable()
 export class TweetState {
 
-    tweets: Models.Tweet[];
+    //tweet: Models.Tweet;
+    tweet: any;
     sentiment: Models.Sentiment;
     error: Models.Error;
 
     constructor() {
     }
 
-    public setTweets(tweets: Models.Tweet[]): void {
-        this.tweets = tweets;
+    public setTweet(tweet: any): void {
+        //this.tweets = tweets;
+        this.tweet = tweet;
     }
 
     public setSentiment(sentiment: Models.Sentiment): void {

@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
 import { Subscriber } from 'rxjs/Subscriber';
 import * as Models from '../models/Models';
+import { EventSourceUtil } from "../util/EventSourceUtil";
 
 @Injectable()
 export class TweetEvents {
@@ -22,50 +23,17 @@ export class TweetEvents {
 
     responses = {
         getSentimentSuccess: new Subject<Models.Sentiment>(),
-        getSentimentError: new Subject<Models.Error>()
+        getSentimentError: new Subject<Models.Error>(),
+        getTweetStreamSuccess: new Subject<Event>()
     }
 
     constructor(
-        private http: Http
+        private http: Http,
+        private eventSourceUtil: EventSourceUtil
     ) { 
         this.initGetSentiment();
         this.initGetTweetStream();
     }
-
-    /*private fromEventSource(url: string, openObserver: Function | null): Observable {
-      return new Observable(observer => {
-        const open = new Subscriber(openObserver);
-        const source = new EventSource(url);
-
-        const onOpen = event => {
-          open.next(event);
-          open.complete();
-        };
-
-        const onError = event => {
-          if (event.readyState === EventSource.CLOSED) {
-            observer.complete();
-          } else {
-            observer.error(event);
-          }
-        };
-
-        const onMessage = event => {
-          observer.next(event.data);
-        };
-
-        source.addEventListener('open', onOpen, false);
-        source.addEventListener('error', onError, false);
-        source.addEventListener('message', onMessage, false);
-
-        return () => {
-          source.removeEventListener('open', onOpen, false);
-          source.removeEventListener('error', onError, false);
-          source.removeEventListener('message', onMessage, false);
-          source.close();
-        };
-      });
-    }*/
 
     private initGetSentiment(): void {
         this.requests.getSentiment
@@ -92,15 +60,9 @@ export class TweetEvents {
     }
 
     private initGetTweetStream(): void {
-        var evtSource = new EventSource("/tweets");
-        evtSource.onopen = (e: Event) => {
-            console.log("open", e);
-        }
-        evtSource.onmessage = (e: MessageEvent) => {
-            console.log("message", e);
-        }
-        evtSource.onerror = (e: Event) => {
-            console.log("error", e);
-        }
+        this.eventSourceUtil.fromEventSource("/tweets")
+        .subscribe(e => {
+            this.responses.getTweetStreamSuccess.next(e);
+        });
     }
 }
