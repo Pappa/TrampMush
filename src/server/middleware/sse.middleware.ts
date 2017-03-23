@@ -16,7 +16,7 @@ export class ServerSentEvents extends EventEmitter {
     res.writeHead(200, ServerConfig.SSE_HEADERS);
     res.write('\n');
 
-    this.on('message', this.sendEvent.bind(res));
+    this.on('message', this.sendEvent.bind(this, res));
 
     this.tempGenerateTweets();
 	}
