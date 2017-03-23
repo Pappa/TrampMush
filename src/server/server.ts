@@ -2,11 +2,12 @@ import * as bodyParser from "body-parser";
 import * as methodOverride from "method-override";
 import * as express from "express";
 import * as path from "path";
-import { SSE } from "./middleware/sse.middleware";
+import { ServerSentEvents } from "./middleware/sse.middleware";
 
 export class Server {
 
   public app: express.Application;
+  private sse: ServerSentEvents;
 
   public static bootstrap(): Server {
     return new Server();
@@ -14,6 +15,7 @@ export class Server {
 
   constructor() {
     this.app = express();
+    this.sse = new ServerSentEvents();
 
     this.config();
     this.routes();
@@ -22,7 +24,7 @@ export class Server {
 
   private api() {
     // Tweets SSE endpoint
-    this.app.get('/tweets', SSE.getTweetStream);
+    this.app.get('/tweets', this.sse.getTweetStream);
   }
 
   private config() {
