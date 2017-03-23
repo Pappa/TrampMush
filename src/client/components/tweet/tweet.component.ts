@@ -26,7 +26,7 @@ export class TweetComponent implements OnInit, OnDestroy {
 	}
 
 	onTweetStateUpdate(state: TweetState) {
-		// TODO: investigate NgZone workaround
+		// TODO: investigate NgZone workaround.
 		// Should this be required, or is Angular
 		// ignoring async events from an EventSource?
 		this.zone.run(() => {
