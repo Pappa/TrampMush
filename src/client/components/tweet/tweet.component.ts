@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 
 import { TweetState } from "../../modules/core/state/TweetState";
 import { TweetStateUpdates } from "../../modules/core/state/TweetStateUpdates";
@@ -13,6 +13,7 @@ export class TweetComponent implements OnInit, OnDestroy {
 	tweet: string;
 	
 	constructor(
+		private zone: NgZone,
 		private tweetStateUpdates: TweetStateUpdates
 	) {}
 
@@ -25,7 +26,11 @@ export class TweetComponent implements OnInit, OnDestroy {
 	}
 
 	onTweetStateUpdate(state: TweetState) {
-		console.log(state.tweet);
-		this.tweet = state.tweet;
+		// TODO: investigate NgZone workaround
+		// Should this be required, or is Angular
+		// ignoring async events from an EventSource?
+		this.zone.run(() => {
+			this.tweet = state.tweet;
+		});
 	}
 }
