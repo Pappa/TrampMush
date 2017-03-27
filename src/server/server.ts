@@ -3,6 +3,7 @@ import * as methodOverride from "method-override";
 import * as express from "express";
 import * as path from "path";
 import { ServerSentEvents } from "./middleware/sse.middleware";
+import * as dotenv from "dotenv";
 
 export class Server {
 
@@ -10,6 +11,7 @@ export class Server {
   private sse: ServerSentEvents;
 
   public static bootstrap(): Server {
+    dotenv.config();
     return new Server();
   }
 
