@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
 import { Subscriber } from 'rxjs/Subscriber';
@@ -61,6 +62,7 @@ export class TweetEvents {
 
     private initGetTweetStream(): void {
         this.eventSourceUtil.fromEventSource("/tweets")
+        .throttleTime(2000)
         .subscribe(e => {
             this.responses.getTweetStreamSuccess.next(e);
         });

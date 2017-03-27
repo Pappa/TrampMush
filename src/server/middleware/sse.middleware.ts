@@ -6,32 +6,37 @@ import { TwitterApi } from "../modules/twitterApi";
 
 export class ServerSentEvents extends EventEmitter {
 
+  twitterApi: TwitterApi;
+
   constructor() {
     super();
     return this;
   }
 
 	public getTweetStream = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+
     req.socket.setTimeout(1000 * 60 * 60);
 
     res.writeHead(200, ServerConfig.SSE_HEADERS);
     res.write('\n');
 
-    this.on('message', this.sendEvent.bind(this, res));
-
-    this.tempGenerateTweets();
+    this.connectToStream(res);
 	}
 
-  private sendEvent = (res: express.Response, event: any) => {
+  private sendEvent = (res: express.Response, tweet: any) => {
     res.write('event: message\n');
-    res.write(`data: ${event}\n\n`);
+    res.write(`data: ${tweet.text}\n\n`);
   }
 
-  private tempGenerateTweets = () => {
-    setInterval(() => {
-      var event = Math.random().toString(36).substring(7);
-      this.emit('message', event);
-    }, 10000);
+  private connectToStream = (res: express.Response) => {
+    this.twitterApi = new TwitterApi();
+    this.twitterApi.connectToStream(
+      ApiConfig.TWITTER_STREAM_URL, 
+      ApiConfig.TWITTER_SEARCH_OPTIONS
+    );
+    //this.twitterApi.on('error', this.twitterApi.disconnect.bind(this.twitterApi));
+    this.twitterApi.on('error', console.log.bind(console, "error"));
+    this.twitterApi.on('tweet', this.sendEvent.bind(this, res));
   }
 
 }

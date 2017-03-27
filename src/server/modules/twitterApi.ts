@@ -1,9 +1,9 @@
-import { Twitter } from 'twitter';
+var Twitter = require('twitter');
 import { EventEmitter } from "events";
 
 export class TwitterApi extends EventEmitter {
 
-	private client: Twitter;
+	private client: any;
 	private stream: any;
 
 	constructor() {
