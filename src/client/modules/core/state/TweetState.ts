@@ -13,7 +13,6 @@ export class TweetState {
     }
 
     public setTweet(tweet: any): void {
-        //this.tweets = tweets;
         this.tweet = tweet;
     }
 

@@ -22,8 +22,6 @@ export class SentimentComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.tweetStateUpdates.subject.subscribe(this.onTweetStateUpdate.bind(this));
-		this.text = "my monkey is nice";
-		this.tweetEvents.requests.getSentiment.next(this.text);
 	}
 
 	ngOnDestroy() {
@@ -32,5 +30,9 @@ export class SentimentComponent implements OnInit, OnDestroy {
 
 	onTweetStateUpdate(state: TweetState) {
 		this.sentiment = state.sentiment;
+		if (this.text !== state.tweet) {
+			this.text = state.tweet;
+			this.tweetEvents.requests.getSentiment.next(this.text);
+		}
 	}
 }

@@ -3,12 +3,14 @@ import * as methodOverride from "method-override";
 import * as express from "express";
 import * as path from "path";
 import { ServerSentEvents } from "./middleware/sse.middleware";
+import { Sentiments } from "./middleware/sentiments.middleware";
 import * as dotenv from "dotenv";
 
 export class Server {
 
   public app: express.Application;
   private sse: ServerSentEvents;
+  private sentiments: Sentiments;
 
   public static bootstrap(): Server {
     dotenv.config();
@@ -18,6 +20,7 @@ export class Server {
   constructor() {
     this.app = express();
     this.sse = new ServerSentEvents();
+    this.sentiments = new Sentiments();
 
     this.config();
     this.routes();
@@ -27,6 +30,8 @@ export class Server {
   private api() {
     // Tweets SSE endpoint
     this.app.get('/tweets', this.sse.getTweetStream);
+    // Sentiment
+    this.app.post('/sentiment', this.sentiments.getSentiment);
   }
 
   private config() {

@@ -40,11 +40,10 @@ export class TweetEvents {
         this.requests.getSentiment
         .concatMap((search: string) => {
             let headers = new Headers();
-            headers.append("X-Mashape-Key", "v8g0kwCaRYmshfcFjZxZlsVFYmP2p1OcS7WjsntSZ9GWy7E4Pb");
             headers.append("Content-Type", "application/x-www-form-urlencoded");
             headers.append("Accept", "application/json");
             return this.http.post(
-                'https://community-sentiment.p.mashape.com/text/',
+                '/sentiment',
                 `txt=${search}`,
                 { headers: headers }
             ).catch((response: Response) => {
@@ -62,7 +61,7 @@ export class TweetEvents {
 
     private initGetTweetStream(): void {
         this.eventSourceUtil.fromEventSource("/tweets")
-        .throttleTime(2000)
+        .throttleTime(30000)
         .subscribe(e => {
             this.responses.getTweetStreamSuccess.next(e);
         });
