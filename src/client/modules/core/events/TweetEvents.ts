@@ -38,6 +38,7 @@ export class TweetEvents {
 
     private initGetSentiment(): void {
         this.requests.getSentiment
+        .throttleTime(1000)
         .concatMap((search: string) => {
             let headers = new Headers();
             headers.append("Content-Type", "application/x-www-form-urlencoded");
@@ -62,8 +63,8 @@ export class TweetEvents {
     private initGetTweetStream(): void {
         this.eventSourceUtil.fromEventSource("/tweets")
         .throttleTime(30000)
-        .subscribe(e => {
-            this.responses.getTweetStreamSuccess.next(e);
+        .subscribe(tweet => {
+            this.responses.getTweetStreamSuccess.next(tweet);
         });
     }
 }

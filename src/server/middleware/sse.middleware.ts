@@ -25,7 +25,7 @@ export class ServerSentEvents extends EventEmitter {
 
   private sendEvent = (res: express.Response, tweet: any) => {
     res.write('event: message\n');
-    res.write(`data: ${tweet.text}\n\n`);
+    res.write(`data: ${JSON.stringify(tweet)}\n\n`);
   }
 
   private connectToStream = (res: express.Response) => {

@@ -17,7 +17,7 @@ export class EventSourceUtil {
 			};
 
 			source.onmessage = (e: MessageEvent) => {
-				observer.next(e.data);
+				observer.next(JSON.parse(e.data));
 			};
 
 			source.onerror = (e: Event) => {

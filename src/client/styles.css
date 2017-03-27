@@ -1,5 +1,41 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
+#sentiment {
+	width: 500px;
+	height: 500px;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -250px 0 0 -250px;
+}
+
+.sentiment-positive {
+	background: #BADA55;
+}
+
+.sentiment-negative {
+	background: #d8546e;
+}
+
+.sentiment-neutral {
+	background: #bfbdbd;
+}
+
+#tweet {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+	width: 300px;
+	height: 200px;
+	border-width: 3px;
+	border-radius: 5%;
+	border-color: #333;
+	background: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -120px 0 0 -170px;
+	padding: 20px;
 }

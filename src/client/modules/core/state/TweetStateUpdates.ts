@@ -30,8 +30,8 @@ export class TweetStateUpdates {
             });
 
         this.tweetEvents.responses.getTweetStreamSuccess
-            .subscribe((e) => {
-                this.tweetState.setTweet(e);
+            .subscribe((tweet) => {
+                this.tweetState.setTweet(tweet);
                 this.subject.next(this.tweetState);
             });
 

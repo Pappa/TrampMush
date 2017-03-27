@@ -30,9 +30,17 @@ export class SentimentComponent implements OnInit, OnDestroy {
 
 	onTweetStateUpdate(state: TweetState) {
 		this.sentiment = state.sentiment;
-		if (this.text !== state.tweet) {
-			this.text = state.tweet;
+		if (state.tweet && this.text !== state.tweet.text) {
+			this.text = state.tweet.text;
 			this.tweetEvents.requests.getSentiment.next(this.text);
 		}
+	}
+
+	setSentimentClass() {
+		console.log(this.sentiment);
+		if (this.sentiment && this.sentiment.sentiment) {
+			return "sentiment-" + this.sentiment.sentiment.toLowerCase();
+		}
+		return "sentiment-neutral";
 	}
 }
