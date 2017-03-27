@@ -38,7 +38,6 @@ export class TweetEvents {
 
     private initGetSentiment(): void {
         this.requests.getSentiment
-        .throttleTime(1000)
         .concatMap((search: string) => {
             let headers = new Headers();
             headers.append("Content-Type", "application/x-www-form-urlencoded");

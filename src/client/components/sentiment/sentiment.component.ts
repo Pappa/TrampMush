@@ -37,7 +37,6 @@ export class SentimentComponent implements OnInit, OnDestroy {
 	}
 
 	setSentimentClass() {
-		console.log(this.sentiment);
 		if (this.sentiment && this.sentiment.sentiment) {
 			return "sentiment-" + this.sentiment.sentiment.toLowerCase();
 		}
