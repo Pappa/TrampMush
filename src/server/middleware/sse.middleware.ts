@@ -2,6 +2,7 @@ import * as express from "express";
 import { ServerConfig } from "../config/server.config";
 import { ApiConfig } from "../config/api.config";
 import { EventEmitter } from "events";
+import { TwitterApi } from "../modules/twitterApi";
 
 export class ServerSentEvents extends EventEmitter {
 
