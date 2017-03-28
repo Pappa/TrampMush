@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import * as Models from '../../modules/core/models/Models';
 
 import { TweetState } from "../../modules/core/state/TweetState";
 import { TweetStateUpdates } from "../../modules/core/state/TweetStateUpdates";
@@ -10,7 +11,7 @@ import { TweetStateUpdates } from "../../modules/core/state/TweetStateUpdates";
 })
 export class TweetComponent implements OnInit, OnDestroy {
 
-	tweet: string;
+	tweet: Models.Tweet;
 	
 	constructor(
 		private zone: NgZone,

@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }  from '../../components/app/app.component';
 import { SentimentComponent }  from '../../components/sentiment/sentiment.component';
 import { TweetComponent }  from '../../components/tweet/tweet.component';
+import { GiphyComponent }  from '../../components/giphy/giphy.component';
 
 import { CoreModule } from "../core/core.module";
 
@@ -17,7 +18,8 @@ import { CoreModule } from "../core/core.module";
   declarations: [ 
   	AppComponent, 
   	SentimentComponent,
-    TweetComponent
+    TweetComponent,
+    GiphyComponent
   ],
   providers: [],
   bootstrap: [ AppComponent ]

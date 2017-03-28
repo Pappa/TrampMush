@@ -7,9 +7,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
 import { Subscriber } from 'rxjs/Subscriber';
 import * as Models from '../models/Models';
 import { EventSourceUtil } from "../util/EventSourceUtil";
+import { TweetUtil } from "../util/TweetUtil";
 
 @Injectable()
 export class TweetEvents {
@@ -25,12 +28,13 @@ export class TweetEvents {
     responses = {
         getSentimentSuccess: new Subject<Models.Sentiment>(),
         getSentimentError: new Subject<Models.Error>(),
-        getTweetStreamSuccess: new Subject<Event>()
+        getTweetStreamSuccess: new Subject<Models.Tweet>()
     }
 
     constructor(
         private http: Http,
-        private eventSourceUtil: EventSourceUtil
+        private eventSourceUtil: EventSourceUtil,
+        private tweetUtil: TweetUtil
     ) { 
         this.initGetSentiment();
         this.initGetTweetStream();
@@ -61,7 +65,10 @@ export class TweetEvents {
 
     private initGetTweetStream(): void {
         this.eventSourceUtil.fromEventSource("/tweets")
+        .filter(this.tweetUtil.filterUnwantedTweets)
         .throttleTime(30000)
+        // TODO: tweet mapper
+        //.map(this.tweetMapper.MessageEvent_Tweet)
         .subscribe(tweet => {
             this.responses.getTweetStreamSuccess.next(tweet);
         });
