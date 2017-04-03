@@ -37,7 +37,7 @@ export class ImageEvents {
                 })
         })
         .map((response: Response): Models.Image => {
-            return response.json().data;
+            return response.json();
         })
         .subscribe((image: Models.Image) => {
             this.responses.getImageSuccess.next(image);

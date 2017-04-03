@@ -36,13 +36,11 @@ export class ImageComponent implements OnInit, OnDestroy {
 	onTweetStateUpdate(state: TweetState) {
 		if (state.trimmedTweetText && this.trimmedTweetText !== state.trimmedTweetText) {
 			this.trimmedTweetText = state.trimmedTweetText;
-			this.imageEvents.requests.getImage.next("donald trump " + this.trimmedTweetText);
+			this.imageEvents.requests.getImage.next(this.trimmedTweetText);
 		}
 	}
 
 	onImageStateUpdate(state: ImageState) {
-		if (state && state.image) {
-			this.image = state.image;
-		}
+		this.image = state.image;
 	}
 }

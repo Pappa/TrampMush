@@ -18,8 +18,8 @@ export class Flickr {
 	    	let result = {
 	    		url: url
 	    	};
-	      res.write(JSON.stringify(result));
-	      res.end();
+			res.write(JSON.stringify(result));
+			res.end();
 	    });
 	}
 
