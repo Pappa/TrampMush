@@ -21,20 +21,6 @@ export interface Response<T> {
 	data: T
 }
 
-export interface GiphyImage {
+export interface Image {
 	url: string
-	width: string
-	height: string
-}
-
-interface GiphyImages {
-	fixed_height: GiphyImage
-	fixed_width: GiphyImage
-}
-
-export interface Giphy {
-	type: string
-	id: string
-	url: string
-	images: GiphyImages
 }

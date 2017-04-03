@@ -4,9 +4,9 @@ import { TweetState } from "./state/TweetState";
 import { TweetStateUpdates } from "./state/TweetStateUpdates";
 import { TweetEvents } from "./events/TweetEvents";
 
-import { GiphyState } from "./state/GiphyState";
-import { GiphyStateUpdates } from "./state/GiphyStateUpdates";
-import { GiphyEvents } from "./events/GiphyEvents";
+import { ImageState } from "./state/ImageState";
+import { ImageStateUpdates } from "./state/ImageStateUpdates";
+import { ImageEvents } from "./events/ImageEvents";
 
 import { EventSourceUtil } from "./util/EventSourceUtil";
 import { TweetUtil } from "./util/TweetUtil";
@@ -16,9 +16,9 @@ import { TweetUtil } from "./util/TweetUtil";
 	TweetState,
 	TweetStateUpdates,
 	TweetEvents,
-	GiphyState,
-	GiphyStateUpdates,
-	GiphyEvents,
+	ImageState,
+	ImageStateUpdates,
+	ImageEvents,
 	EventSourceUtil,
 	TweetUtil
   ]

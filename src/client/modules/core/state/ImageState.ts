@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import * as Models from '../models/Models';
 
 @Injectable()
-export class GiphyState {
+export class ImageState {
 
-    giphy: Models.Giphy;
+    image: Models.Image;
 
     constructor() {
     }
 
-    public setGiphy(giphy: Models.Giphy): void {
-        this.giphy = giphy;
+    public setImage(image: Models.Image): void {
+        this.image = image;
     }
 
 }

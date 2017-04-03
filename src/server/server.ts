@@ -4,7 +4,6 @@ import * as express from "express";
 import * as path from "path";
 import { ServerSentEvents } from "./middleware/sse.middleware";
 import { Sentiments } from "./middleware/sentiments.middleware";
-import { Giphy } from "./middleware/giphy.middleware";
 import { Flickr } from "./middleware/flickr.middleware";
 import * as dotenv from "dotenv";
 
@@ -13,7 +12,6 @@ export class Server {
   public app: express.Application;
   private sse: ServerSentEvents;
   private sentiments: Sentiments;
-  private giphy: Giphy;
   private flickr: Flickr;
 
   public static bootstrap(): Server {
@@ -25,7 +23,6 @@ export class Server {
     this.app = express();
     this.sse = new ServerSentEvents();
     this.sentiments = new Sentiments();
-    this.giphy = new Giphy();
     this.flickr = new Flickr();
 
     this.config();
@@ -38,8 +35,6 @@ export class Server {
     this.app.get('/tweets', this.sse.getTweetStream);
     // Sentiment
     this.app.post('/sentiment', this.sentiments.getSentiment);
-    // Giphy
-    this.app.get('/giphy', this.giphy.getGif);
     // Image
     this.app.get('/image', this.flickr.getImage);
   }
