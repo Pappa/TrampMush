@@ -66,7 +66,7 @@ export class TweetEvents {
     private initGetTweetStream(): void {
         this.eventSourceUtil.fromEventSource("/tweets")
         .filter(this.tweetUtil.filterUnwantedTweets)
-        .throttleTime(30000)
+        .throttleTime(10000)
         // TODO: tweet mapper
         //.map(this.tweetMapper.MessageEvent_Tweet)
         .subscribe(tweet => {

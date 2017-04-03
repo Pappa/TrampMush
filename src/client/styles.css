@@ -28,7 +28,7 @@
 	font-weight: 400;
 	line-height: 20px;
 	width: 300px;
-	height: 200px;
+	height: 100px;
 	border-width: 3px;
 	border-radius: 5%;
 	border-color: #333;
@@ -36,6 +36,19 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin: -120px 0 0 -170px;
+	margin: -160px 0 0 -170px;
 	padding: 20px;
+}
+
+#giphy {
+	width: 200px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: 0 0 0 -100px;
+}
+
+#giphy img {
+	border: 3px solid #000;
+	width: 200px;
 }

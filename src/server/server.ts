@@ -5,6 +5,7 @@ import * as path from "path";
 import { ServerSentEvents } from "./middleware/sse.middleware";
 import { Sentiments } from "./middleware/sentiments.middleware";
 import { Giphy } from "./middleware/giphy.middleware";
+import { Flickr } from "./middleware/flickr.middleware";
 import * as dotenv from "dotenv";
 
 export class Server {
@@ -13,6 +14,7 @@ export class Server {
   private sse: ServerSentEvents;
   private sentiments: Sentiments;
   private giphy: Giphy;
+  private flickr: Flickr;
 
   public static bootstrap(): Server {
     dotenv.config();
@@ -24,6 +26,7 @@ export class Server {
     this.sse = new ServerSentEvents();
     this.sentiments = new Sentiments();
     this.giphy = new Giphy();
+    this.flickr = new Flickr();
 
     this.config();
     this.routes();
@@ -37,6 +40,8 @@ export class Server {
     this.app.post('/sentiment', this.sentiments.getSentiment);
     // Giphy
     this.app.get('/giphy', this.giphy.getGif);
+    // Image
+    this.app.get('/image', this.flickr.getImage);
   }
 
   private config() {
