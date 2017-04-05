@@ -18,6 +18,7 @@ export class TweetState {
     public setTweet(tweet: Models.Tweet): void {
         this.tweet = tweet;
         this.trimmedTweetText = this.tweetUtil.trimTweetText(tweet.text);
+        console.log("t: ", this.trimmedTweetText);
     }
 
     public setSentiment(sentiment: Models.Sentiment): void {
