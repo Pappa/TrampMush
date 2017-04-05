@@ -4,7 +4,7 @@ import * as Models from '../models/Models';
 @Injectable()
 export class TweetUtil {
 
-    private readonly MIN_WORD_LENGTH = 4;
+    private readonly MIN_WORD_LENGTH = 3;
     private readonly FILTER_REGEXP = [/@[a-z0-9_]+/gi, /http[^ ]+/g, /…/g, /&amp;/g, /\n/, /\r/];
     private readonly SPLIT_REGEXP = /[ .!?#:",/()]/;
 
