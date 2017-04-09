@@ -20,6 +20,7 @@
       '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
+      '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
 
       // other libraries
       'rxjs':                      'npm:rxjs'
