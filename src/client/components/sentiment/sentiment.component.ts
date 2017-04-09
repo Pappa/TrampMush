@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { trigger, state, style } from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 import { TweetEvents } from "../../modules/core/events/TweetEvents";
 import { TweetState } from "../../modules/core/state/TweetState";
@@ -11,9 +11,14 @@ import * as Models from '../../modules/core/models/Models';
 	selector: 'sentiment',
 	templateUrl: 'sentiment.component.html',
 	animations: [
-		trigger('pulseState', [
-			state('inactive', style({transform: 'translateX(0) scale(1)'})),
-			state('active',   style({transform: 'translateX(0) scale(1.1)'}))
+		trigger('pulse', [
+            transition('* <=> *', [
+                animate(600, keyframes([
+                    style({transform: 'translateX(0) scale(1)', offset: 0}),
+                    style({transform: 'translateX(0) scale(1.1)', offset: .5}),
+                    style({transform: 'translateX(0) scale(1)', offset: 1}),
+                ]))
+            ])
 		])
 	]
 })

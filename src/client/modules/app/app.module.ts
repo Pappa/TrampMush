@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent }  from '../../components/app/app.component';
 import { SentimentComponent }  from '../../components/sentiment/sentiment.component';
@@ -13,7 +14,8 @@ import { CoreModule } from "../core/core.module";
   imports: [
   	HttpModule,
   	BrowserModule,
-    CoreModule
+    CoreModule,
+    BrowserAnimationsModule
   ],
   declarations: [ 
   	AppComponent, 
