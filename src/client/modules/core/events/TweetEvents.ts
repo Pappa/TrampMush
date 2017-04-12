@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptionsArgs, Headers } from '@angular/http';
+import { AjaxResponse, AjaxError } from 'rxjs/observable/dom/AjaxObservable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/map';
@@ -7,12 +7,13 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/dom/ajax';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import { Subscriber } from 'rxjs/Subscriber';
 import * as Models from '../models/Models';
-import { EventSourceUtil } from "../util/EventSourceUtil";
-import { TweetUtil } from "../util/TweetUtil";
+import { EventSourceUtil } from '../util/EventSourceUtil';
+import { TweetUtil } from '../util/TweetUtil';
 
 @Injectable()
 export class TweetEvents {
@@ -32,7 +33,6 @@ export class TweetEvents {
     }
 
     constructor(
-        private http: Http,
         private eventSourceUtil: EventSourceUtil,
         private tweetUtil: TweetUtil
     ) { 
@@ -43,28 +43,30 @@ export class TweetEvents {
     private initGetSentiment(): void {
         this.requests.getSentiment
         .concatMap((search: string) => {
-            let headers = new Headers();
-            headers.append("Content-Type", "application/x-www-form-urlencoded");
-            headers.append("Accept", "application/json");
-            return this.http.post(
-                '/sentiment',
-                `txt=${search}`,
-                { headers: headers }
-            ).catch((response: Response) => {
-                this.responses.getSentimentError.next(response.json());
+            return Observable.ajax({
+                url: '/sentiment',
+                body: `txt=${search}`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                }
+            })
+            .catch((ajax: AjaxError) => {
+                this.responses.getSentimentError.next(ajax);
                 return Observable.empty();
             })
         })
-        .map((response: Response): Models.Sentiment => {
-            return response.json().result;
+        .map((ajax: AjaxResponse): Models.Sentiment => {
+            return ajax.response.result;
         })
-        .subscribe((result) => {
-            this.responses.getSentimentSuccess.next(result);
+        .subscribe((sentiment: Models.Sentiment) => {
+            this.responses.getSentimentSuccess.next(sentiment);
         });
     }
 
     private initGetTweetStream(): void {
-        this.eventSourceUtil.fromEventSource("/tweets")
+        this.eventSourceUtil.fromEventSource('/tweets')
         .filter(this.tweetUtil.filterUnwantedTweets)
         .throttleTime(10000)
         // TODO: tweet mapper
