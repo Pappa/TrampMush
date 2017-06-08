@@ -13,9 +13,9 @@ import * as Models from '../../modules/core/models/Models';
 	animations: [
 		trigger('pulse', [
             transition('* <=> *', [
-                animate(300, keyframes([
+                animate(500, keyframes([
                     style({transform: 'translateX(0) scale(1)', offset: 0}),
-                    style({transform: 'translateX(0) scale(1.1)', offset: .5}),
+                    style({transform: 'translateX(0) scale(1.3)', offset: .6}),
                     style({transform: 'translateX(0) scale(1)', offset: 1}),
                 ]))
             ])
