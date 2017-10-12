@@ -4,7 +4,7 @@ module.exports = [
     {
         entry: './src/client/main.ts',
         output: {
-            path: path.resolve(__dirname, 'dist-webpack/client'),
+            path: path.resolve(__dirname, 'dist/client'),
             filename: 'bundle.js'
         },
         resolve: {
